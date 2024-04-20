@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 
 import { Recipe } from '../../recipe.model';
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-recipe-item',
@@ -13,11 +14,12 @@ export class RecipeItemComponent {
   // We want to bind it from our recipe-list component
   @Input() recipe: Recipe;
 
-  // @Output so the event can be listened to from outside
-  @Output() recipeSelected = new EventEmitter<void>();
+  constructor(private recipeService: RecipeService) {
+
+  }
 
   onSelected() {
-    this.recipeSelected.emit();
+    this.recipeService.recipeSelected.emit(this.recipe);
   }
 
 }
