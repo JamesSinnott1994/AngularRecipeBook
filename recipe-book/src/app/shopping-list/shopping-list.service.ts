@@ -23,4 +23,14 @@ export class ShoppingListService {
         this.ingredientsChanged.emit(this.ingredients.slice());
     }
 
+    addIngredients(ingredients: Ingredient[]) {
+        // for (let ingredient of ingredients) {
+        //     this.addIngredient(ingredient); // Would create a lot of events which we don't want!
+        // }
+
+        // Directly add all ingredients in one go and then emit the event
+        this.ingredients.push(...ingredients); // Spread operator "..." turns an array of elements into a list of elements
+        this.ingredientsChanged.emit(this.ingredients.slice())
+    }
+
 }
